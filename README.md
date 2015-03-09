@@ -31,7 +31,6 @@
         [0=>12,1=>44,2=>6,3=>45,4=>2,5=>134,6=>44,7=>4,8=>16],
     ];
 
-
     echo JqPlotWidget::widget([
         'data'=>$data,
         'htmlOptions'=>[
