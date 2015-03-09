@@ -15,6 +15,7 @@ namespace vakorovin\yii2_jqplot_widget;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\base\Widget;
+use yii\helpers\Json;
 
 class JqPlotWidget extends Widget
 {
@@ -23,39 +24,54 @@ class JqPlotWidget extends Widget
 
 	public $data=[];
 
-	public $options=[];
+	public $htmlOptions=[];
 
 	public $jqplotOptions=[];
 
-/*
- * 
- * 
- *     public static function tag($name, $content = '', $options = [])
+    public function init()
     {
-        $html = "<$name" . static::renderTagAttributes($options) . '>';
-        return isset(static::$voidElements[strtolower($name)]) ? $html : "$html$content</$name>";
-    }
+		parent::init();
 
-//*/
+		if (!empty($this->htmlOptions['id'])){
+			$this->setId($this->htmlOptions['id']);
+		}
+
+		$this->htmlOptions['id']=$this->id;
+    }
 
     public function run()
     {
 
-		$jqplotOptions="";
-		if (!empty($this->jqplotOptions)){
-			$jqplotOptions.="{\n";
-			foreach ((array) $this->jqplotOptions as $param=>$value){
-				$jqplotOptions.="  {$param}: '{$value}',\n";
+		Assets::register($this->getView());
+
+		$data="[";
+
+		if (empty($this->data)){
+			$data="[]";
+		} else {
+			$graphs=[];
+			foreach ($this->data as $_graph){
+				$graph=[];
+				foreach ($_graph as $x=>$y){
+					$graph[]="[{$x}, {$y}]";
+				}
+				$graphs[]="[".implode(",", $graph)."]";
 			}
-			$jqplotOptions.="}\n";
+			$data="[".implode(",", $graphs)."]";
 		}
 
+		$data=Json::encode($this->data);
+		$jqplotOptions=Json::encode($this->jqplotOptions);
+
 		$JavaScript = "jQuery('#".$this->id;
-		$JavaScript .= "').jqplot({$options});";
+		$JavaScript .= "').jqplot({$data}, {$jqplotOptions});";
+
+        echo Html::tag("div", "", $this->htmlOptions);
 
 		$this->getView()->registerJs($JavaScript, View::POS_END);
 
-
     }
+
+
 
 }
