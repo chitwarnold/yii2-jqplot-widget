@@ -27,28 +27,30 @@ class JqPlotWidget extends Widget
 
 	public $jqplotOptions=[];
 
+	private $_id;
+
     public function init()
     {
 		parent::init();
 
 		if (!empty($this->htmlOptions['id'])){
 			$this->setId($this->htmlOptions['id']);
-		}
+		} else $this->getId();
 
-		$this->htmlOptions['id']=$this->id;
+		$this->htmlOptions['id']=$this->getId();
     }
 
     public function run()
     {
+
+        echo Html::tag("div", "", $this->htmlOptions);
 
 		Assets::register($this->getView());
 
 		$data=Json::encode($this->data);
 		$jqplotOptions=Json::encode($this->jqplotOptions);
 
-		$JavaScript = "jQuery('#".$this->id+"').jqplot({$data}, {$jqplotOptions});";
-
-        echo Html::tag("div", "", $this->htmlOptions);
+		$JavaScript = "jQuery('#".$this->getId()."').jqplot({$data}, {$jqplotOptions});\n";
 
 		$this->getView()->registerJs($JavaScript, View::POS_END);
 
