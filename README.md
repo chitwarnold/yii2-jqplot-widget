@@ -6,6 +6,8 @@
 
 ![ScreenShot](https://raw.githubusercontent.com/vakorovin/yii2-jqplot-widget/master/screenshots/basicline.png)
 
+![ScreenShot](https://raw.githubusercontent.com/vakorovin/yii2-jqplot-widget/master/screenshots/2.png)
+
 ### Установка
 
 В корне вашего проекта в composer.json в раздел "require" пропишите:
