@@ -5,7 +5,7 @@
 	"homepage": "https://github.com/vakorovin/yii2-jqplot-widget",
 	"type": "yii2-extension",
 	"license": "MIT",
-	"version": "0.1.0@alpha",
+	"version": "0.2.0@beta",
 	"authors": [
 		{
 			"name": "Vladimir Korovin",
