@@ -1,10 +1,12 @@
 # Yii2 jqPlot Widget
 
-Виджет jqPlot (http://www.jqplot.com) для Yii2
+Виджет jqPlot (http://www.jqplot.com) позволяет рисовать графики в ваших проектах на Yii2. Немаловажным фактором в выборе именно jpPlot стала поддержка логарифмической шкалы (что просто необходимо при построении графика абонентского трафика за учетный период).
 
 # Скриншоты
 
 ![ScreenShot](https://raw.githubusercontent.com/vakorovin/yii2-jqplot-widget/master/screenshots/basicline.png)
+
+![ScreenShot](https://raw.githubusercontent.com/vakorovin/yii2-jqplot-widget/master/screenshots/2.png)
 
 ### Установка
 
@@ -28,7 +30,6 @@
         [1,4,56,7,8,9,0,45,45],
         [0=>12,1=>44,2=>6,3=>45,4=>2,5=>134,6=>44,7=>4,8=>16],
     ];
-
 
     echo JqPlotWidget::widget([
         'data'=>$data,
