@@ -47,7 +47,22 @@ class JqPlotWidget extends Widget
 
 		Assets::register($this->getView());
 
-		$data=Json::encode($this->data);
+
+		$data="";
+		if (empty($this->data)){
+			$data="[]";
+		} else {
+			$graphs=[];
+			foreach ($this->data as $_graph){
+				$graph=[];
+				foreach ($_graph as $x=>$y){
+					$graph[]="[{$x}, {$y}]";
+				}
+				$graphs[]="[".implode(",", $graph)."]";
+			}
+			$data="[".implode(",", $graphs)."]";
+		}
+
 		$jqplotOptions=Json::encode($this->jqplotOptions);
 
 		$JavaScript = "jQuery('#".$this->getId()."').jqplot({$data}, {$jqplotOptions});\n";
